@@ -1,62 +1,51 @@
 import User from "../model/userModel.js";
 
-
 class UserServices {
-  static async createUser(req, res) {
+  static async createUser(userData) {
     try {
-      const user = new User(req.body);
+      if (!userData || Object.keys(userData).length === 0) {
+        throw new Error("Request body cannot be empty");
+      }
+
+      const user = new User(userData);
       await user.save();
-      res.status(201).send(user);
+      return user;
     } catch (error) {
-      res.status(400).send(error);
+      throw error;
     }
   }
 
-  static async getAllUsers(req, res) {
+  static async getAllUsers() {
     try {
-      const users = await User.find();
-      res.send(users);
+      return await User.find();
     } catch (error) {
-      res.status(500).send(error);
+      throw error;
     }
   }
 
-  static async getUserById(req, res) {
+  static async getUserById(userId) {
     try {
-      const user = await User.findById(req.params.id);
-      if (!user) {
-        return res.status(404).send();
-      }
-      res.send(user);
+      return await User.findById(userId);
     } catch (error) {
-      res.status(500).send(error);
+      throw error;
     }
   }
 
-  static async updateUser(req, res) {
+  static async updateUser(userId, updateData) {
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-      if (!user) {
-        return res.status(404).send();
-      }
-      res.send(user);
+      return await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
     } catch (error) {
-      res.status(400).send(error);
+      throw error;
     }
   }
 
-  static async deleteUser(req, res) {
+  static async deleteUser(userId) {
     try {
-      const user = await User.findByIdAndDelete(req.params.id);
-      if (!user) {
-        return res.status(404).send();
-      }
-      res.send(user);
+      return await User.findByIdAndDelete(userId);
     } catch (error) {
-      res.status(500).send(error);
+      throw error;
     }
   }
 }
 
-
-export default UserServices
+export default UserServices;

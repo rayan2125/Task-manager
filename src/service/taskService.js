@@ -1,60 +1,47 @@
 import Task from "../model/taskModel.js";
 
 class TaskServices {
-    static async createTask(req, res) {
-      try {
-        const task = new Task(req.body);
-        await task.save();
-        res.status(201).send(task);
-      } catch (error) {
-        res.status(400).send(error);
-      }
-    }
-  
-    static async getAllTasks(req, res) {
-      try {
-        const tasks = await Task.find().populate("user");
-        res.send(tasks);
-      } catch (error) {
-        res.status(500).send(error);
-      }
-    }
-  
-    static async getTaskById(req, res) {
-      try {
-        const task = await Task.findById(req.params.id).populate("user");
-        if (!task) {
-          return res.status(404).send();
-        }
-        res.send(task);
-      } catch (error) {
-        res.status(500).send(error);
-      }
-    }
-  
-    static async updateTask(req, res) {
-      try {
-        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
-        if (!task) {
-          return res.status(404).send();
-        }
-        res.send(task);
-      } catch (error) {
-        res.status(400).send(error);
-      }
-    }
-  
-    static async deleteTask(req, res) {
-      try {
-        const task = await Task.findByIdAndDelete(req.params.id);
-        if (!task) {
-          return res.status(404).send();
-        }
-        res.send(task);
-      } catch (error) {
-        res.status(500).send(error);
-      }
+  static async createTask(taskData) {
+    try {
+      const task = new Task(taskData);
+      await task.save();
+      return task;
+    } catch (error) {
+      throw error;
     }
   }
 
-  export default TaskServices
+  static async getAllTasks() {
+    try {
+      return await Task.find().populate("user");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getTaskById(taskId) {
+    try {
+      return await Task.findById(taskId).populate("user");
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateTask(taskId, updateData) {
+    try {
+      return await Task.findByIdAndUpdate(taskId, updateData, { new: true, runValidators: true });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteTask(taskId) {
+    try {
+      return await Task.findByIdAndDelete(taskId);
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export default TaskServices;
