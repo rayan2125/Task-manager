@@ -1,5 +1,5 @@
 import express, { Router } from "express"
-import { DeletMember, MembersDetailsController, UpdateMember, ViewMember } from "../../controllers/mmberDtls.controllers.js"
+
 import { createUserHandler, deleteUserHandler, getAllUsersHandler, getUserByIdHandler, updateUserHandler } from "../../controller/userController.js"
 
 

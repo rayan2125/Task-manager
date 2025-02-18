@@ -1,5 +1,5 @@
 import express, { Router } from "express"
-import { createTaskHandler, deleteTaskHandler, getAllTasksHandler, getTaskByIdHandler, updateTaskHandler } from "../../controller/taskController"
+import { createTaskHandler, deleteTaskHandler, getAllTasksHandler, getTaskByIdHandler, updateTaskHandler } from "../../controller/taskController.js"
 
 
 

@@ -1,4 +1,4 @@
-import UserServices from "../service/userService";
+import UserServices from "../service/userService.js";
 
 export const createUserHandler = async (req, res) => {
   try {
