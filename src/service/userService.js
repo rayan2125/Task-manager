@@ -14,7 +14,14 @@ class UserServices {
       throw error;
     }
   }
-
+  static async userlogin (userData){
+    let {email}=userData 
+    try {
+        let user = await User.findOne({email:email})
+    } catch (error) {
+       throw error 
+    }
+  }
   static async getAllUsers() {
     try {
       return await User.find();
