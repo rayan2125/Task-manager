@@ -9,8 +9,8 @@ import {
 
 const taskRouter = express.Router();
 
-taskRouter.post("/create", createTaskHandler);  
-taskRouter.get("/view", getAllTasksHandler);    
+taskRouter.post("/", createTaskHandler);  
+taskRouter.get("/", getAllTasksHandler);    
 taskRouter.get("/:id", getTaskByIdHandler);     
 taskRouter.put("/:id", updateTaskHandler);     
 taskRouter.delete("/:id", deleteTaskHandler);  

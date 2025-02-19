@@ -1,9 +1,11 @@
 import Task from "../model/taskModel.js";
 
 class TaskServices {
-  static async createTask(taskData) {
+  static async createTask(taskData,info) {
+    const { title, description,  } = taskData;
+    const{_id:user}=info
     try {
-      const task = new Task(taskData);
+        const task = new Task({ title, description, user });
       await task.save();
       return task;
     } catch (error) {
@@ -11,17 +13,25 @@ class TaskServices {
     }
   }
 
-  static async getAllTasks() {
+  static async getAllTasks(user) {
+    const{_id:id}=user
+   
     try {
-      return await Task.find().populate("user");
+
+       return await Task.find({ user: id }).populate("user");
     } catch (error) {
       throw error;
     }
   }
 
   static async getTaskById(taskId) {
+    // console.log(taskId)
+    let _id = taskId
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+        throw { status: 400, message: "Invalid task id" };
+      }
     try {
-      return await Task.findById(taskId).populate("user");
+      return await Task.findById(_id).populate("user");
     } catch (error) {
       throw error;
     }

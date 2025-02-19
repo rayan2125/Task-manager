@@ -5,7 +5,7 @@ export const createUserHandler = async (req, res) => {
         const user = await UserServices.createUser(req.body);
         res.status(201).send(user);
     } catch (error) {
-        res.status(400).send({ error: error.message });
+        res.status(error.status).send({ error: error.message });
     }
 };
 export const userLoginHandler = async (req, res) => {
@@ -13,7 +13,7 @@ export const userLoginHandler = async (req, res) => {
         const user = await UserServices.userLogin(req.body);
         res.status(200).send(user);
     } catch (error) {
-        res.status(400).send({ error: error.message });
+        res.status(error.status).send({ error: error.message });
     }
 }
 

@@ -18,9 +18,7 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.error("MongoDB Connection Error:", err));
 
-app.get("/", (req, res) => {
-  res.send("Hello, MongoDB on Render!");
-});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

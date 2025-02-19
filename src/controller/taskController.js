@@ -1,8 +1,11 @@
 import TaskServices from "../service/taskService.js";
 
 export const createTaskHandler = async (req, res) => {
+   
+
   try {
-    const task = await TaskServices.createTask(req.body);
+    
+    const task = await TaskServices.createTask(req.body,req.user);
     res.status(201).send(task);
   } catch (error) {
     res.status(400).send({ error: error.message });
@@ -11,7 +14,7 @@ export const createTaskHandler = async (req, res) => {
 
 export const getAllTasksHandler = async (req, res) => {
   try {
-    const tasks = await TaskServices.getAllTasks();
+    const tasks = await TaskServices.getAllTasks(req.user);
     res.send(tasks);
   } catch (error) {
     res.status(500).send({ error: error.message });
