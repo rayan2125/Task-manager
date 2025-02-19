@@ -7,8 +7,8 @@ const routers = express.Router();
 
 // Array of routes and their respective routers
 const routes = [
-    { path: "/user", router: userRouter },
-    { path: "/task", middleware: authMiddleware, router: taskRouter },
+    { path: "/auth", router: userRouter },
+    { path: "/tasks", middleware: authMiddleware, router: taskRouter },
 ];
 
 
