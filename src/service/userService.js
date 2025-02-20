@@ -24,7 +24,7 @@ class UserServices {
             await user.save();
             return user;
         } catch (error) {
-            console.error("Error in createUser:", error);
+            
             throw error.status ? error : { status: 500, message: "Internal Server Error" };
         }
     }
@@ -54,52 +54,13 @@ class UserServices {
                 process.env.JWT_SECRET,
                 { expiresIn: "7d" }
             );
-            // console.log("this token is coming::",token)
+          
             return { user, token };
         } catch (error) {
             throw error.status ? error : { status: 500, message: "Internal Server Error" };
         }
     }
-
-  
-    static async getAllUsers() {
-        try {
-            return await User.find();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-
-    static async getUserById(userId) {
-        try {
-            return await User.findById(userId);
-        } catch (error) {
-            throw error;
-        }
-    }
-
-  
-    static async updateUser(userId, updateData) {
-        try {
-            if (updateData.password) {
-                updateData.password = await hashPassword(updateData.password);
-            }
-
-            return await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    // Delete User
-    static async deleteUser(userId) {
-        try {
-            return await User.findByIdAndDelete(userId);
-        } catch (error) {
-            throw error;
-        }
-    }
+    
 }
 
 export default UserServices;

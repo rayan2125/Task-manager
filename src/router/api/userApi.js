@@ -4,11 +4,7 @@ import { createUserHandler, deleteUserHandler, getAllUsersHandler, getUserByIdHa
 
 
 const userRouter = express(Router)
-userRouter.post("/create",createUserHandler)
-userRouter.get("/allView",getAllUsersHandler )
-userRouter.get("/:id", getUserByIdHandler)
-userRouter.put("/:id", updateUserHandler)
-userRouter.delete("/:id", deleteUserHandler)
+userRouter.post("/signup",createUserHandler)
 userRouter.post("/login",userLoginHandler);
 
 export default userRouter
